@@ -23,3 +23,4 @@ def plot2():
 
 plot1()
 
+plot2()
