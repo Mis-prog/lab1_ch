@@ -3,4 +3,8 @@ project(Lab1)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Lab1 main.cpp plot.py task1.h)
+set(optimizations "-Ofast")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${optimizations}")
+
+add_executable(Lab1 main.cpp task1.h task2.h)
