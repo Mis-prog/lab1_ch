@@ -3,23 +3,25 @@ import pandas as pd
 
 def plot1():
     data = pd.read_csv("D:/5sem/numerical/Lab1/cmake-build-debug/task1.txt", sep=" ", names=[1, 2])
-    pl.plot(data[1], data[2])
-    pl.axhline(y=0.0002, color='red', linestyle='--')
-    pl.xlabel("Количесто узлов, n")
-    pl.ylabel("Tочность")
-    pl.title("Зависимость Δn")
-    pl.grid(True)
-    pl.show()
+    pl1=pl
+    pl1.plot(data[1], data[2])
+    pl1.axhline(y=0.0002, color='red', linestyle='--')
+    pl1.xlabel("Количесто узлов, n")
+    pl1.ylabel("Tочность")
+    pl1.title("Зависимость Δn")
+    pl1.grid(True)
+    pl1.show()
 
 def plot2():
     data2 = pd.read_csv("D:/5sem/numerical/Lab1/cmake-build-debug/task1_2.txt", sep=" ", names=[1, 2])
-    pl.figure(figsize=(10, 5))
-    pl.plot(data2[1], data2[2])
-    pl.xlabel("x")
-    pl.ylabel("Tочность")
-    pl.title("Ошибка приближения")
-    pl.grid(True)
-    pl.show()
+    pl2=pl
+    pl2.figure(figsize=(10, 5))
+    pl2.plot(data2[1], data2[2])
+    pl2.xlabel("x")
+    pl2.ylabel("Tочность")
+    pl2.title("Ошибка приближения")
+    pl2.grid(True)
+    pl2.show()
 
 plot1()
 

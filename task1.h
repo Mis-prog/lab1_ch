@@ -5,6 +5,8 @@
 #include <fstream>
 #include <cstdlib>
 
+double rasnEquals,rasnNotEquals;
+
 using namespace std;
 
 double acos_foo(double x) {
@@ -78,12 +80,17 @@ void task1_2(int n) {
     vector<double> x(n, 0), y(n, 0);
     nodeFillEquals(x,y, n);
     double h_accurace = (b - a) / 100000.0;
-    double x_current = 0;
+    double x_current = 0,diff,sup=-1000;
     while (x_current<b){
-        out2 << x_current << " " << abs(acos_foo(x_current)- lagrange(x,y,x_current,n)) << endl;
+        diff=abs(acos_foo(x_current)- lagrange(x,y,x_current,n));
+        out2 << x_current << " " << diff << endl;
+        if (diff>sup){
+            sup=diff;
+        }
         x_current+=h_accurace;
     }
     out2.close();
+    rasnEquals=diff;
 }
 
 void task1_main(int n) {
