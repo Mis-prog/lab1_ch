@@ -6,6 +6,7 @@
 #include <cmath>
 #include <random>	
 #include <fstream>
+#include <windows.h>
 // test	
 using namespace std;
 const double PI = 3.141592653589793;
@@ -478,15 +479,14 @@ void Ex6_point2()
 int main()
 {
 
-	setlocale(LC_CTYPE, "Russian");
+    SetConsoleOutputCP(CP_UTF8);
 	//Ex1();
 	//Ex2();
-	//Ex3();
+	Ex3();
 	//Ex4(30);
 	//Ex4_Point3();
 	//Ex5();
 	//Ex6(30);
-	Ex6_point2();
 	
 	return 0;
 

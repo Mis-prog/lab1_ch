@@ -6,6 +6,6 @@
 
 int main() {
     SetConsoleOutputCP(CP_UTF8);
-    task1_main(40);
+    task2_main(32);
     return 0;
 }
