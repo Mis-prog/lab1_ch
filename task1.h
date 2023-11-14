@@ -36,7 +36,6 @@ void nodeFillEquals(vector<double> &x,vector<double> &y,int n){
         x[i] = x[i - 1] + h;
         y[i] = acos_foo(x[i]);
     }
-
 }
 
 double checkAccuracy(vector<double>& x, vector<double>& y,int n) {
