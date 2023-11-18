@@ -95,6 +95,6 @@ void task1_main(int n) {
     int n0=task1_1(n);
     cout << "n0=" << n0 << endl;
     task1_2(32);
-    system("D:/5sem/numerical/Lab1/plotTask1.py");
+    system("python D:/5sem/numerical/Lab1/plotTask1.py");
 }
 

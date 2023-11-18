@@ -1,38 +1,44 @@
 
 
-vector<double> &coef(vector<double> &x, vector<double> &y, int n0) {
-    vector<vector<double>> coeff(n0, vector<double>(n0, 0));
-    vector<double> a(n0, 0);
-    for (int i = n0 - 1; i >= 0; i--) {
-        coeff[i][0] = y[i + 1] - y[i];
-    }
-    for (int j = 1; j < n0; j++) {
-        for (int i = n0 - 1 - j; i >= 0; i--) {
-            coeff[i][j] = coeff[i + 1][j - 1] - coeff[i][j - 1];
-        }
-    }
-    double start = 0, end = 1;
-    double h = (end - start) / n0;
-    int factorial = 1;
-    for (int i = 1; i <= n0; i++) {
-        a[i - 1] = coeff[0][i - 1] / (i * factorial * pow(h, i));
-    }
-    return a;
+double devideDiff(int i, int j, vector<double> &X, vector<double> &Y) {
+    if (j - i == 1) return (Y[j] - Y[i]) / (X[j] - X[i]);
+    else return (devideDiff(i + 1, j, X, Y) - devideDiff(i, j - 1, X, Y)) / (X[j] - X[i]);
 }
 
-double Newton(vector<double> &x, vector<double> &y, vector<double> &a, int n0, double _x) {
-    double result = y[0];
-    for (int i = 1; i <= n0; i++) {
-        for (int j = 0; j < i; j++) {
-            result += a[i - 1] * (_x - x[j]);
-        }
+double NewTonEval(vector<double>& XN, vector<double>& YN) {
+    double summ_of_Newton = 0;
+    double product_of_Newton = 1;
+    double sup=-1000;
+    vector<double> DevidedDiffs;
+    ofstream out3;
+    out3.open("task3.txt");
+    for (int i = 1; i < XN.size(); i++) {
+        DevidedDiffs.push_back(devideDiff(0, i, XN, YN));
     }
-    return result;
+    double a=0,b=1,diff=0;
+    double h_curr=(b-a)/(double)1e5,x_cur=0;
+    while(x_cur<=1){
+        summ_of_Newton = 0;
+        for (int j = 1; j < XN.size(); j++) {
+            product_of_Newton = 1;
+            for (int k = 0; k < j; k++) {
+                product_of_Newton *= (x_cur - XN[k]);
+            }
+            summ_of_Newton += DevidedDiffs[j-1] * product_of_Newton;
+        }
+        diff=abs(acos_foo(x_cur) - summ_of_Newton);
+        out3 << x_cur << " " << diff << endl;
+        if (diff > sup) {
+            sup = diff;
+        }
+        x_cur+=h_curr;
+    }
+    out3.close();
+    return sup;
 }
 
 void task3_main(int n0) {
-    vector<double> x(n0 + 1, 0), y(n0 + 1, 0), a;
+    vector<double> x(n0 + 1, 0), y(n0 + 1, 0);
     nodeFillEquals(x, y, n0);
-    a = coef(x, y, n0);
-    cout << Newton(x, y, a, 32, 0.2);
+    cout << "Точность интерполяции Ньютона " << NewTonEval(x,y) << endl;
 }

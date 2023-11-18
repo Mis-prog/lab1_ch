@@ -14,7 +14,7 @@ def plot1():
     pl1.show()
 
 
-def plot2():
+def plot1_2():
     data2 = pd.read_csv("D:/5sem/numerical/Lab1/cmake-build-debug/task1_2.txt", sep=" ", names=[1, 2])
     pl2 = pl
     pl2.figure(figsize=(10, 5))
@@ -26,7 +26,7 @@ def plot2():
     pl2.show()
 
 
-def plot3():
+def plot2():
     data3 = pd.read_csv("D:/5sem/numerical/Lab1/cmake-build-debug/task2.txt", sep=" ", names=[1, 2])
     pl3 = pl
     pl3.figure(figsize=(10, 5))
@@ -48,5 +48,25 @@ def check_accur():
     pl.plot(data3[1], data3[2])
     pl.show()
 
+def plot3():
+    data1 = pd.read_csv("D:/5sem/numerical/Lab1/cmake-build-debug/task1_2.txt", sep=" ", names=[1, 2])
+    data2 = pd.read_csv("D:/5sem/numerical/Lab1/cmake-build-debug/task3.txt", sep=" ", names=[1, 2])
+    pl.figure(figsize=(10, 5))
+    pl.subplot(121)
+    pl.plot(data1[1], data1[2])
+    pl.subplot(122)
+    pl.plot(data2[1], data2[2])
+    pl.show()
 
-plot1()
+
+def plot6():
+    data = pd.read_csv("D:/5sem/numerical/Lab1/cmake-build-debug/task6.txt", sep=" ", names=[1, 2])
+    pl6 = pl
+    pl6.plot(data[1], data[2])
+    pl6.xlabel("x")
+    pl6.ylabel("Tочность")
+    pl6.title("Ошибка приближения")
+    pl6.grid(True)
+    pl6.show()
+
+plot6()

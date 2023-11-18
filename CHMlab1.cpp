@@ -339,7 +339,7 @@ void Ex5() {
 
 }
 
-double Ex6( int n, int var)
+double buildSpline(int n, int var)
 { 
 	// x from 0 to n -1
 	double start = 0, end = 2 * PI;
@@ -367,12 +367,12 @@ double Ex6( int n, int var)
 	vector <double> gamma(n + 1, { 0 });
 	vector <double> omega(n + 1, { 0 });
 
-	for (int i = 2; i <= n; i++) // прямой ход 
+    for (int i = 2; i <= n; i++) // прямой ход
 	{
 		altha[i-1] = h[i - 1];
 		betta[i-1] = -2 * (h[i] + h[i - 1]);
 		gamma[i-1] = h[i];
-		omega[i-1] = 3 * ((y_funk[i] - y_funk[i - 1]) / h[i] - (y_funk[i - 1] - y_funk[i - 2]) / h[i - 1]);
+		omega[i-1] = 6 * ((y_funk[i] - y_funk[i - 1]) / h[i] - (y_funk[i - 1] - y_funk[i - 2]) / h[i - 1]);
 	}
 	for (int i = 1 ; i <= n; i++) // прямой ход 
 	{
@@ -454,17 +454,17 @@ void Ex6_point2()
 {
 	double pogr = 0.00001;
 	int n = 1;
-	double actual_pogr = Ex6(n,0);
+	double actual_pogr = buildSpline(n, 0);
 	vector<double> Grap_of_pogr;
 	Grap_of_pogr.push_back(actual_pogr);
 
 	while (actual_pogr > pogr)
 	{
 		n++;
-		actual_pogr = Ex6(n,0);
+		actual_pogr = buildSpline(n, 0);
 		Grap_of_pogr.push_back(actual_pogr);
 	}
-	Ex6(n, 1);
+    buildSpline(n, 1);
 	ofstream fout;
 	fout.open("Ex6_Point2_graphic.txt");
 
@@ -482,11 +482,10 @@ int main()
     SetConsoleOutputCP(CP_UTF8);
 	//Ex1();
 	//Ex2();
-	Ex3();
+	//Ex3();
 	//Ex4(30);
 	//Ex4_Point3();
-	//Ex5();
-	//Ex6(30);
+    buildSpline(30, 0);
 	
 	return 0;
 
