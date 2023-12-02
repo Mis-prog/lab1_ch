@@ -7,6 +7,25 @@
 
 int main() {
     SetConsoleOutputCP(CP_UTF8);
-    task6_main();
+    int n=1;
+    while (n!=0){
+        switch (n) {
+            case 1:
+                task1_main(32);
+                cin >> n;
+                break;
+            case 2:
+                task2_main(32);
+                cin >> n;
+                break;
+            case 3:
+                task3_main(32);
+                cin >> n;
+                break;
+            case 6:
+                task6_main(5808);
+                break;
+        }
+    }
     return 0;
 }

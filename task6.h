@@ -90,18 +90,26 @@ double buildSpline(vector<double> &x, vector<double> &y) {
 }
 
 
-void task6_main() {
-    int best_count = 0, i = 5800;
-    double curr_delta = 100;
-    while (curr_delta > (2 * 1e-4)) {
-        vector<double> x(i + 1), y(i + 1);
-        nodeFillEquals(x, y, i);
-        curr_delta = buildSpline(x, y);
-        best_count = i;
-        i += 1;
-        vector<double>().swap(x);
-        vector<double>().swap(y);
-        cout << i << " " << curr_delta << endl;
-    }
-    cout << "Количество сплайнов: " << best_count << endl;
+void task6_main(int n0) {
+//    int best_count = 0, i = 5800;
+//    double curr_delta = 100;
+//    while (curr_delta > (2 * 1e-4)) {
+//        vector<double> x(i + 1), y(i + 1);
+//        nodeFillEquals(x, y, i);
+//        curr_delta = buildSpline(x, y);
+//        best_count = i;
+//        i += 1;
+//        vector<double>().swap(x);
+//        vector<double>().swap(y);
+//        cout << i << " " << curr_delta << endl;
+//    }
+//    cout << "Количество сплайнов: " << best_count << endl;
+    vector<double> x(n0+1), y(n0+1);
+    nodeFillEquals(x, y, n0);
+    ofstream out_res;
+    out_res.open("result.txt", ios::app);
+    out_res << "Интерполяция сплайнами: " << buildSpline(x, y) << endl;
+    out_res.close();
+    result();
+    system("python D:/5sem/numerical/Lab1/plot_6.py");
 }

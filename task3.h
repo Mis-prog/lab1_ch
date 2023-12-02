@@ -40,5 +40,9 @@ double NewTonEval(vector<double>& XN, vector<double>& YN) {
 void task3_main(int n0) {
     vector<double> x(n0 + 1, 0), y(n0 + 1, 0);
     nodeFillEquals(x, y, n0);
-    cout << "Точность интерполяции Ньютона " << NewTonEval(x,y) << endl;
+    ofstream out_res;
+    out_res.open("result.txt",ios::app);
+    out_res << "Интерполяция Ньютоном на равномерной сетке: " << NewTonEval(x,y)<< endl;
+    out_res.close();
+    result();
 }

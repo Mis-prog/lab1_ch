@@ -1,3 +1,4 @@
+
 const double PI = acos(-1.0);
 
 void nodeFillNotEquals(vector<double>& x, vector<double>& y,int n0){
@@ -29,11 +30,13 @@ double task2(int n0){
     return sup;
 }
 
+
 void task2_main(int n0){
     vector<double> x(n0,0),y(n0,0);
     nodeFillNotEquals(x, y, n0);
-    cout << "Неравномерная сетка: " << task2(32)<< endl;
-    x.resize(n0+1);y.resize(n0+1);
-    nodeFillEquals(x,y,n0);
-    cout << "Равномерная сетка: " << checkAccuracy(x,y,32);
+    ofstream out_res;
+    out_res.open("result.txt",ios::app);
+    out_res << "Неравномерная сетка: " << task2(32)<< endl;
+    out_res.close();
+    result();
 }
