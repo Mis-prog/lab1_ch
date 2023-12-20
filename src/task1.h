@@ -8,6 +8,8 @@
 
 using namespace std;
 
+const double epsilon=2*1e-4;
+
 double acos_foo(double x) {
     return x * x * acos(0.9 * x);
 }
@@ -54,7 +56,8 @@ double checkAccuracy(vector<double> &x, vector<double> &y, int n) {
 
 int task1_1(int n) {
     int bestNode = 0;
-    double current_rasn = 0, best_rasn = 1000;
+    double current_rasn = 0;
+    bool node_opt=0;
     vector<double> x(n + 1, 0), y(n + 1, 0);
     ofstream out1_1;
     out1_1.open("task1_1.txt");
@@ -62,9 +65,9 @@ int task1_1(int n) {
         nodeFillEquals(x, y, i);
         current_rasn = checkAccuracy(x, y, i);
         out1_1 << i << " " << current_rasn << endl;
-        if (current_rasn < best_rasn) {
-            best_rasn = current_rasn;
+        if (current_rasn < epsilon and !node_opt) {
             bestNode = i;
+            node_opt=1;
         }
     }
     out1_1.close();
@@ -72,46 +75,36 @@ int task1_1(int n) {
 }
 
 double task1_2(int n) {
-    ofstream out1_2;
+    ofstream out1_2,out1_2_3;
     out1_2.open("task1_2.txt");
+    out1_2_3.open("task1_plot.txt");
     double a = 0, b = 1;
     vector<double> x(n + 1, 0), y(n + 1, 0);
     nodeFillEquals(x, y, n);
     double h_accurace = (b - a) / (double) 1e5;
     double x_current = 0, diff, sup = -1000;
+    double y_cur=0;
     while (x_current < b) {
-        diff = abs(acos_foo(x_current) - lagrange(x, y, x_current, n));
+        y_cur=lagrange(x, y, x_current, n);
+        diff = abs(acos_foo(x_current) - y_cur);
         out1_2 << x_current << " " << diff << endl;
+        out1_2_3 << x_current << " " << y_cur << endl;
         if (diff > sup) {
             sup = diff;
         }
         x_current += h_accurace;
     }
     out1_2.close();
+    out1_2_3.close();
     return sup;
 }
 
-void result(){
-    string line;
-    ifstream in("result.txt");
-    if (in.is_open())
-    {
-        while (std::getline(in, line))
-        {
-            std::cout << line << std::endl;
-        }
-    }
-    in.close();
-}
 
 
-void task1_main(int n) {
+int task1_main(int n) {
     int n0 = task1_1(n);
     cout << "n0=" << n0 << endl;
-    ofstream out_res;
-    out_res.open("result.txt");
-    out_res << "Интерполяция Лагранжем(равномерная сетка): " << task1_2(n) << endl;
-    out_res.close();
-    result();
-    system("python D:/5sem/numerical/Lab1/plot_1.py");
+    cout  << "Интерполяция Лагранжем(равномерная сетка): " << task1_2(n0) << endl;
+    system("python D:/5sem/numerical/Lab1/src/plot/plot_1.py");
+    return n0;
 }

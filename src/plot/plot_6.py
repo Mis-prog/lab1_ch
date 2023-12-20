@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def plot6_1():
-    data = pd.read_csv("D:/5sem/numerical/Lab1/cmake-build-debug/test6.txt", sep=" ", names=[1, 2])
+    data = pd.read_csv("D:/5sem/numerical/Lab1/cmake-build-debug/test6.txt", sep=" ", names=[1, 2],nrows=100)
     pl6 = pl
     pl6.plot(data[1], data[2])
     pl6.xlabel("Количество сплайнов")

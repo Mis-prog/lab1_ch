@@ -51,7 +51,7 @@ def check_accur():
 def plot3():
     data1 = pd.read_csv("D:/5sem/numerical/Lab1/cmake-build-debug/task1_2.txt", sep=" ", names=[1, 2])
     data2 = pd.read_csv("D:/5sem/numerical/Lab1/cmake-build-debug/task3.txt", sep=" ", names=[1, 2])
-    pl.figure(figsize=(10, 5))
+    pl.figure(figsize=(11, 5))
     pl.subplot(121)
     pl.plot(data1[1], data1[2])
     pl.subplot(122)
@@ -69,4 +69,4 @@ def plot6():
     pl6.grid(True)
     pl6.show()
 
-plot6()
+plot3()
